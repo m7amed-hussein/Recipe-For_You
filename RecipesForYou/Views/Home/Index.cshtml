@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RecipesForYou.Models.Recipe>
+@{
+    ViewData["Title"] = "Home page";
+}
+<h1>All Recipes</h1>
+<div class="card-columns">
+    @foreach (var item in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="~/photo/kabsa.jpeg" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item._Chief.Name</h6>
+                        <p class="card-text">@item.Summary</p>
+                        
+                        <form method="post" asp-action="Delete" asp-route-id="@item.Id">
+                            <a class="btn btn-primary" asp-action="Edit"asp-route-id="@item.Id">Edit</a>
+                            <span id="confirmDeleteSpan_@item.Id" style="display:none">
+                                <span>Confirm Delete</span>
+                                <button type="submit" class="btn btn-danger">
+                                    Yes
+                                </button>
+                                <a href="#" class="btn btn-primary"
+                                   onclick="ConfirmDelete('@item.Id',false)">
+                                    No
+                                </a>
+                            </span>
+                            <span id="deleteSpan_@item.Id">
+                                <a href="#" class="btn btn-danger"
+                                   onclick="ConfirmDelete('@item.Id',true)">
+                                    Delete
+                                </a>
+                            </span>
+                            <a class="btn btn-primary"asp-action="Details"asp-route-id="@item.Id">How to do!</a>
+                        </form>
+                        
+                    </div>
+                </div>
+            }
+</div>
+<div class="text-center">
+    <p>Learn about behind the scene genuis<a href="https://www.facebook.com/MhmdMostafaHusen/"> Mohamed Hussein Facebook account</a>.</p>
+</div>
